@@ -16,7 +16,7 @@
     <link href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="globals.css" />
     <link rel="stylesheet" href="styleguide.css" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=20260304" />
   </head>
   <body>
     <main class="end-of-bodystart">
@@ -47,16 +47,6 @@
         </article>
         <section class="group-wrapper">
           <div class="group-4">
-            <div class="client-marquee" aria-label="고객사 로고">
-              <div class="title-logos">
-                <div class="trusted-by-top">
-                  <p class="agency-and-creative">Trusted by 150+ <br />top brands worldwide.</p>
-                  <div class="div-2"></div>
-                </div>
-                <img class="section-mask-group" src="img/cl.svg" alt="고객사 로고 목록" />
-              </div>
-              <div class="div-2"></div>
-            </div>
             <div class="group-5">
               <div class="dark">
                 <p class="trusted-by-industry">FROM THE AUTHOR</p>
@@ -105,21 +95,20 @@
               <img class="mask-group" src="img/a2.png" alt="제품 홍보 이미지 예시 2" />
               <img class="mask-group-2" src="img/a1.png" alt="제품 홍보 이미지 예시 1" />
               <img class="mask-group-3" src="img/a3.png" alt="제품 홍보 이미지 예시 3" />
+              <img class="mask-group-a4" src="img/a4.png" alt="제품 홍보 이미지 예시 4" />
+              <img class="mask-group-a5" src="img/a5.png" alt="제품 홍보 이미지 예시 5" />
             </div>
           </div>
         </article>
         <article class="group-13">
-          <button class="button" aria-label="이전 슬라이드" type="button">
-            <div class="SVG"><img class="vector" src="img/al.svg" alt="" /></div>
-          </button>
-          <button class="SVG-wrapper" aria-label="다음 슬라이드" type="button">
-            <div class="SVG"><img class="img" src="img/ar.svg" alt="" /></div>
-          </button>
           <p class="text-wrapper-11">SERVICE 02</p>
           <h2 class="heading-why">기술 구동 시뮬레이션 영상</h2>
           <p class="p">눈에 보이지 않는 기술 원리를, 누구나 이해할 수 있는 영상으로 풀어냅니다</p>
-          <img class="mask-group-4" src="img/b1.png" alt="기술 시뮬레이션 영상 예시 1" />
-          <img class="mask-group-5" src="img/b2.png" alt="기술 시뮬레이션 영상 예시 2" />
+          <div class="service02-images">
+            <img class="mask-group-4" src="img/b1.png" alt="기술 시뮬레이션 영상 예시 1" />
+            <img class="mask-group-5" src="img/b2.png" alt="기술 시뮬레이션 영상 예시 2" />
+            <img class="mask-group-b3" src="img/b3.png" alt="기술 시뮬레이션 영상 예시 3" />
+          </div>
         </article>
       </section>
       <section class="group-14">
@@ -144,9 +133,6 @@
           <a href="mailto:official@bokbok.art" class="link">
             <span class="text-wrapper-13">이메일 보내기</span>
           </a>
-          <a href="#kakao" class="link-2">
-            <span class="text-wrapper-14">카카오톡 문의</span>
-          </a>
         </section>
       </section>
       <footer class="group-18">
@@ -158,5 +144,46 @@
         <address class="text-wrapper-16">official@bokbok.art</address>
       </footer>
     </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      function setupSlider(container, totalWidth) {
+        var offset = 0;
+        var step = 420;
+        var prevBtn = container.querySelector('.button');
+        var nextBtn = container.querySelector('.SVG-wrapper');
+
+        function getMaxOffset() {
+          return Math.max(0, totalWidth + 200 - window.innerWidth);
+        }
+
+        function update() {
+          container.style.transform = 'translateX(' + (-offset) + 'px)';
+          // Keep buttons and text fixed
+          var fixed = container.querySelectorAll('.button, .SVG-wrapper, .text-wrapper-11, .heading-why, .p');
+          for (var i = 0; i < fixed.length; i++) {
+            fixed[i].style.transform = 'translateX(' + offset + 'px)';
+          }
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener('click', function () {
+            offset = Math.min(offset + step, getMaxOffset());
+            update();
+          });
+        }
+        if (prevBtn) {
+          prevBtn.addEventListener('click', function () {
+            offset = Math.max(offset - step, 0);
+            update();
+          });
+        }
+      }
+
+      var service1 = document.querySelector('.group-12');
+      if (service1) setupSlider(service1, 2848);
+
+      // service02 no longer uses slider
+    });
+  </script>
   </body>
 </html>
